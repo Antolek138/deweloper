@@ -1,0 +1,955 @@
+@use 'colors' as c;
+@use 'mixin' as *;
+@use 'components' as *;
+
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	scroll-behavior: smooth;
+	font-size: 62.5%;
+}
+
+body,
+button {
+	font-family: 'Inter', sans-serif;
+}
+
+body {
+	font-size: 1.6rem;
+	color: c.$white;
+	background-color: c.$blue;
+}
+
+.nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 100;
+	transition: background-color 0.3s;
+
+	&__container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0 1em;
+		height: 60px;
+	}
+
+	&__logo {
+		font-size: 2.8rem;
+		z-index: 1;
+	}
+
+	&__menu {
+		display: flex;
+		align-items: center;
+		justify-content: space-evenly;
+		flex-direction: column;
+		position: absolute;
+		inset: 0;
+		padding: 4em 0;
+		height: 100dvh;
+		background-color: c.$black;
+		translate: 120% 0;
+		transition: translate 0.3s;
+
+		&--active {
+			translate: 0;
+		}
+	}
+
+	&__menu-link {
+		&:last-child {
+			padding: 0.5em 1em;
+			border-radius: 10px;
+			background-color: c.$blue;
+		}
+	}
+
+	&__bars {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		gap: 5px 0;
+		position: absolute;
+		right: 0.5em;
+		padding: 1em;
+		border: none;
+		background: none;
+
+		&--active {
+			.nav__bars-line:nth-child(1) {
+				rotate: 45deg;
+				translate: 0 8px;
+			}
+
+			.nav__bars-line:nth-child(2) {
+				opacity: 0;
+			}
+
+			.nav__bars-line:nth-child(3) {
+				rotate: -45deg;
+				translate: 0 -8px;
+			}
+		}
+	}
+
+	&__bars-line {
+		width: 25px;
+		height: 3px;
+		border-radius: 10px;
+		background-color: c.$white;
+		transition: rotate 0.3s, translate 0.3s 0.1s, opacity 0.3s;
+	}
+}
+
+.header {
+	position: relative;
+	min-height: 80dvh;
+	background-attachment: fixed;
+	background-position: 50% -4em;
+	background-size: cover;
+	background-image: url('../../dist/img/header-small.jpg');
+	z-index: 1;
+
+	&::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: c.$heroOne;
+		z-index: 2;
+	}
+
+	&__container {
+		position: relative;
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		flex-direction: column;
+		padding: 0 1em;
+		min-height: 80dvh;
+		z-index: 3;
+	}
+
+	&__title,
+	&__text,
+	&__btn {
+		margin-top: 2em;
+	}
+
+	&__text {
+		max-width: 320px;
+	}
+
+	&__btn {
+		padding: 0.5em 1em;
+		font-size: 1.8rem;
+		border: none;
+		border-radius: 5px;
+		color: c.$white;
+		background-color: c.$blue;
+	}
+}
+
+.info {
+	&__container {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		gap: 5em 0;
+		background-color: c.$darkblue;
+	}
+
+	&__text {
+		position: relative;
+		font-size: 1.8rem;
+
+		&::after {
+			content: '';
+			position: absolute;
+			left: 50%;
+			bottom: -20px;
+			width: 120%;
+			height: 5px;
+			background-color: c.$white;
+			border-radius: 10px;
+			translate: -50% 0;
+		}
+	}
+}
+
+.about {
+	&__container {
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+	}
+
+	&__card {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		padding: 4em 1em;
+
+		&--two {
+			background-color: c.$darkOne;
+		}
+
+		&--three {
+			background-color: c.$darkTwo;
+		}
+	}
+
+	&__icon {
+		font-size: 4.8rem;
+	}
+
+	&__title {
+		margin: 1em 0;
+		color: c.$black;
+	}
+
+	&__text {
+		color: #cadef6;
+	}
+}
+
+.offers {
+	color: c.$black;
+	background-color: c.$lightWhite;
+
+	&__container {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		gap: 5em 0;
+	}
+
+	&__card {
+		width: clamp(260px, 280px, 340px);
+
+		&-top {
+			position: relative;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			flex-direction: column;
+			height: clamp(160px, 180px, 200px);
+			background-size: cover;
+			background-position: center;
+
+			&::after {
+				@include heroImgAfter;
+				background-color: c.$heroTwo;
+			}
+
+			&--one {
+				background-image: url('../../dist/img/roomOne.webp');
+			}
+
+			&--two {
+				background-image: url('../../dist/img/roomTwo.webp');
+			}
+
+			&--three {
+				background-image: url('../../dist/img/roomThree.webp');
+			}
+		}
+
+		&-bottom {
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+			text-align: center;
+			padding: 2em 1em;
+			background-color: c.$grayOne;
+		}
+	}
+
+	&__status,
+	&__price {
+		margin: 0.5em;
+		padding: 0.5em 1em;
+		font-weight: bold;
+		border-radius: 5px;
+		color: c.$white;
+		background-color: c.$heroBlue;
+		z-index: 1;
+	}
+
+	&__status {
+		align-self: flex-end;
+	}
+
+	&__price {
+		align-self: flex-start;
+	}
+
+	&__meters {
+		align-self: flex-end;
+		text-align: right;
+		font-weight: bold;
+	}
+
+	&__title {
+		margin: 1em 0;
+	}
+}
+
+.property {
+	color: c.$black;
+	background-color: c.$grayTwo;
+
+	&__container {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		gap: 4em;
+	}
+
+	&__card {
+		position: relative;
+		display: flex;
+		justify-content: flex-end;
+		align-items: flex-start;
+		flex-direction: column;
+		width: clamp(260px, 280px, 300px);
+		height: clamp(260px, 280px, 300px);
+		color: c.$white;
+		background-size: cover;
+		background-position: center;
+
+		&::after {
+			@include heroImgAfter;
+			background-color: c.$heroTwo;
+		}
+
+		&--one {
+			background-image: url('../../dist/img/cityOne.webp');
+		}
+
+		&--two {
+			background-image: url('../../dist/img/cityTwo.webp');
+		}
+
+		&--three {
+			background-image: url('../../dist/img/cityThree.webp');
+		}
+	}
+
+	&__text-box {
+		text-align: center;
+		z-index: 1;
+	}
+
+	&__town,
+	&__suggestions {
+		margin: 0.5em;
+		padding: 0.5em 1em;
+		font-weight: bold;
+	}
+
+	&__town {
+		border-radius: 5px;
+		background-color: c.$heroBlue;
+	}
+}
+
+.workflow {
+	text-align: center;
+	background-color: c.$darkblue;
+
+	&__container {
+		display: flex;
+		flex-direction: column;
+		gap: 6.5em;
+	}
+
+	&__card {
+		@include center;
+		flex-direction: column;
+	}
+
+	&__bloop {
+		@include center;
+		width: 120px;
+		height: 120px;
+		font-size: 3.8rem;
+		font-weight: bold;
+		background-color: c.$blue;
+
+		&--one {
+			border-radius: 51% 49% 79% 21% / 52% 52% 48% 48%;
+		}
+
+		&--two {
+			border-radius: 30% 70% 18% 82% / 70% 30% 70% 30%;
+		}
+
+		&--three {
+			border-radius: 17% 83% 35% 65% / 73% 26% 74% 27%;
+		}
+
+		&--four {
+			border-radius: 38% 62% 21% 79% / 85% 36% 64% 15%;
+		}
+	}
+
+	&__title {
+		margin: 1.5em 0;
+	}
+
+	&__text {
+		padding: 0 0.5em;
+	}
+}
+
+.kinghouse {
+	&__container {
+		display: grid;
+
+		grid-auto-columns: 1fr;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 0.5fr 1.5fr 1.5fr 1fr 1fr;
+		gap: 0px 0px;
+		grid-template-areas:
+			'title title'
+			'text1 text1'
+			'text2 text2'
+			'count1 count2'
+			'count3 count4';
+
+		text-align: center;
+		color: c.$black;
+		background-color: c.$lightWhite;
+	}
+
+	&__title {
+		grid-area: title;
+	}
+
+	&__photo {
+		display: none;
+	}
+
+	&__text {
+		&--one {
+			margin-bottom: 1em;
+			grid-area: text1;
+		}
+
+		&--two {
+			grid-area: text2;
+		}
+	}
+
+	&__number,
+	&__num {
+		font-weight: bold;
+	}
+
+	&__number {
+		&--one {
+			grid-area: count1;
+		}
+
+		&--two {
+			grid-area: count2;
+		}
+
+		&--three {
+			grid-area: count3;
+		}
+
+		&--four {
+			grid-area: count4;
+		}
+	}
+
+	&__num {
+		display: block;
+		color: c.$blue;
+		font-size: 2.4rem;
+	}
+
+	&__title {
+		padding: 0 1em 2em 1em;
+		font-size: 2.4rem;
+	}
+
+	&__text {
+		margin-top: 1em;
+		padding: 0 1em;
+	}
+
+	&__title,
+	&__text,
+	&__number {
+		place-self: center;
+	}
+}
+
+.references {
+	color: c.$black;
+	background-color: c.$grayTwo;
+
+	&__container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		gap: 4em;
+	}
+
+	&__card {
+		display: grid;
+		grid-auto-columns: 1fr;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-rows: 1fr 1fr 0.5fr 0.5fr;
+		gap: 0px 0px;
+		grid-template-areas:
+			'quote quote quote'
+			'opinion opinion opinion'
+			'photo name name'
+			'photo job job';
+		padding: 1em;
+		width: clamp(280px, 80%, 340px);
+		height: 240px;
+		box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+		background-color: c.$white;
+	}
+
+	&__icon {
+		grid-area: quote;
+		font-size: 5.8rem;
+	}
+
+	&__opinion {
+		grid-area: opinion;
+		margin: 0 0 1em 0;
+		text-align: center;
+	}
+
+	&__photo {
+		grid-area: photo;
+		border-radius: 50%;
+	}
+
+	&__name {
+		grid-area: name;
+		font-weight: bold;
+	}
+
+	&__job {
+		grid-area: job;
+		margin-left: 0.5em;
+	}
+}
+
+.agents {
+	color: c.$black;
+	background-color: c.$lightWhite;
+
+	&__container {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		gap: 4em;
+	}
+
+	&__card {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		flex-direction: column;
+		position: relative;
+		padding: 1em;
+		width: 240px;
+		height: 320px;
+		background-size: cover;
+		background-position: center;
+		background-color: #8888;
+		z-index: 1;
+
+		&::after {
+			@include heroImgAfter;
+			background-color: c.$heroTwo;
+		}
+
+		&--one {
+			background-image: url('../../dist/img/b1.webp');
+		}
+
+		&--two {
+			background-image: url('../../dist/img/b2.webp');
+		}
+
+		&--three {
+			background-image: url('../../dist/img/b3.webp');
+		}
+	}
+
+	&__name,
+	&__job {
+		position: relative;
+		font-weight: bold;
+		z-index: 100;
+	}
+
+	&__name {
+		padding: 0.5em;
+		border-radius: 5px;
+		background-color: c.$heroWhite;
+	}
+
+	&__job {
+		margin-top: 1em;
+		color: c.$white;
+	}
+}
+
+.footer {
+	padding: 2em 1em;
+	color: c.$white;
+	text-align: center;
+	background-color: c.$black;
+
+	&__list {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		list-style: none;
+		margin-bottom: 5em;
+	}
+
+	&__list-item {
+		&--header {
+			margin-bottom: 1em;
+			font-size: 2rem;
+			font-weight: bold;
+		}
+
+		&--text {
+			max-width: 300px;
+		}
+
+		&--margin {
+			margin-bottom: 0.5em;
+		}
+	}
+
+	&__text {
+		font-size: 1.8rem;
+	}
+}
+
+//?===========
+//?MEDIA QUERY
+//?===========
+
+@media (min-width: 768px) {
+	.nav {
+		&__container {
+			height: 80px;
+		}
+
+		&__logo {
+			font-size: 3.2rem;
+		}
+
+		&__menu {
+			flex-direction: row;
+			gap: 0;
+			position: static;
+			height: auto;
+			padding: 0;
+			background: none;
+			translate: 0;
+		}
+
+		&__menu-link {
+			margin-left: 2em;
+		}
+
+		&__bars {
+			display: none;
+		}
+	}
+
+	.header {
+		background-image: url('../../dist/img/header-big.jpg');
+
+		&__container {
+			padding-bottom: 4em;
+		}
+
+		&__title {
+			font-size: 4.6rem;
+		}
+
+		&__text {
+			font-size: 1.8rem;
+			max-width: 380px;
+		}
+	}
+
+	.about {
+		&__text {
+			max-width: 380px;
+		}
+	}
+
+	.offers {
+		&__container {
+			justify-content: center;
+			flex-direction: row;
+			flex-wrap: wrap;
+			gap: 4em;
+		}
+	}
+
+	.property {
+		&__container {
+			justify-content: center;
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
+
+		&__card {
+			width: clamp(300px, 320px, 340px);
+			height: clamp(300px, 320px, 340px);
+		}
+	}
+
+	.workflow {
+		&__container {
+			justify-content: center;
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
+
+		&__card {
+			width: clamp(300px, 320px, 340px);
+		}
+	}
+
+	.kinghouse {
+		&__container {
+			display: grid;
+			grid-auto-columns: 1fr;
+			grid-template-columns: 1fr 1fr;
+			grid-template-rows: 1fr 1fr 1fr 1fr 0.5fr 0.5fr 1fr 1fr;
+			gap: 0px 0px;
+			grid-template-areas:
+				'photo1 photo2'
+				'photo1 photo2'
+				'photo1 photo2'
+				'title title'
+				'text1 text1'
+				'text2 text2'
+				'count1 count2'
+				'count3 count4';
+		}
+
+		&__photo {
+			display: block;
+			place-self: center;
+
+			&--one {
+				grid-area: photo1;
+			}
+
+			&--two {
+				grid-area: photo2;
+			}
+		}
+
+		&__title {
+			font-size: 3.8rem;
+			padding: 0;
+		}
+
+		&__text {
+			max-width: 540px;
+
+			&--two {
+				margin-bottom: 1em;
+			}
+		}
+	}
+
+	.references {
+		&__container {
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
+	}
+
+	.agents {
+		&__container {
+			justify-content: center;
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
+	}
+}
+
+@media (min-width: 992px) {
+	.nav {
+		&__logo {
+			font-size: 3.4rem;
+		}
+
+		&__menu-link {
+			font-size: 1.8rem;
+			transition: color 0.3s, background-color 0.3s;
+
+			&:hover:not(:last-child) {
+				color: c.$blue;
+			}
+
+			&:hover:last-child {
+				color: c.$blue;
+				background-color: c.$white;
+			}
+		}
+	}
+
+	.header {
+		background-position: 0 -6em;
+
+		&__title {
+			font-size: 5.8rem;
+		}
+
+		&__text {
+			max-width: 470px;
+			font-size: 2rem;
+		}
+
+		&__btn {
+			transition: color 0.3s, background-color 0.3s;
+			cursor: pointer;
+
+			&:hover {
+				color: c.$blue;
+				background-color: c.$white;
+			}
+		}
+	}
+
+	.info {
+		position: relative;
+		top: -90px;
+		z-index: 5;
+
+		.wrapper {
+			display: flex;
+			text-align: center;
+			justify-content: center;
+		}
+
+		&__container {
+			justify-content: center;
+			flex-direction: row;
+			gap: 0 6em;
+			width: 80%;
+			max-width: 1200px;
+			height: 180px;
+			border-radius: 10px;
+		}
+	}
+
+	.about {
+		margin-top: -11.5em;
+
+		&__container {
+			flex-direction: row;
+		}
+
+		&__card {
+			padding: 10em 1em 4em 1em;
+		}
+	}
+
+	.offers {
+		gap: 4em;
+
+		&__card {
+			width: 380px;
+			height: 100%;
+		}
+
+		&__text {
+			width: 320px;
+		}
+	}
+
+	.kinghouse {
+		background-color: c.$lightWhite;
+
+		&__container {
+			display: grid;
+			grid-auto-columns: 1fr;
+			grid-template-columns: 1fr 1fr 1fr 1fr;
+			grid-template-rows: 1fr 1fr 1fr 1fr;
+			gap: 0px 0px;
+			grid-template-areas:
+				'title title photo1 photo2'
+				'text1 text1 photo1 photo2'
+				'text2 text2 photo1 photo2'
+				'count1 count2 count3 count4';
+		}
+
+		&__title {
+			padding: 0 0.5em;
+			place-self: center;
+			justify-self: flex-start;
+		}
+
+		&__photo {
+			&--one {
+				margin-right: 0.5em;
+			}
+
+			&--two {
+				margin-left: 0.5em;
+			}
+		}
+	}
+
+	.agents {
+		&__container {
+			gap: 5.5em;
+		}
+	}
+
+	.footer {
+		&__container {
+			display: flex;
+			justify-content: center;
+			align-items: stretch;
+			gap: 5em;
+		}
+
+		&__list {
+			width: 280px;
+		}
+	}
+}
+
+@media (min-width: 1200px) {
+	.header {
+		background-position: 0 -18em;
+	}
+}

@@ -1,0 +1,38 @@
+@use 'colors' as c;
+
+.wrapper {
+	margin: 0 auto;
+	max-width: 1200px;
+	width: 100%;
+}
+
+.ptb {
+	padding: 4em 0;
+}
+
+.ptb2 {
+	padding: 6em 0;
+}
+
+.color {
+	color: c.$green;
+}
+
+.section__text-box {
+	padding-bottom: 4em;
+	text-align: center;
+}
+
+.section__title {
+	margin-top: 0.5em;
+	font-size: 2.4rem;
+}
+
+.section__text {
+	color: c.$blue;
+}
+
+a {
+	text-decoration: none;
+	color: c.$white;
+}
