@@ -542,6 +542,8 @@ body {
 
 	&__photo {
 		grid-area: photo;
+		width: 65px;
+		height: 65px;
 		border-radius: 50%;
 	}
 
@@ -792,6 +794,11 @@ body {
 		&__container {
 			flex-direction: row;
 			flex-wrap: wrap;
+		}
+
+		&__photo{
+			width: 75px;
+			height: 75px;
 		}
 	}
 
