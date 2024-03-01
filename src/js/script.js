@@ -13,6 +13,15 @@ document.addEventListener('DOMContentLoaded', () => {
 		rootMargin: `0.5%`,
 	}
 
+	const opinionOneBtn = document.querySelector('.references__btn--one')
+	const opinionTwoBtn = document.querySelector('.references__btn--two')
+	const opinionThreeBtn = document.querySelector('.references__btn--three')
+	const opinionContainer = document.querySelector('.references__container')
+	const opinionCards = document.querySelectorAll('.references__card')
+	const totalCards = opinionCards.length
+	const opinionWidth = opinionCards[1].clientWidth
+	let startIndex = 0
+
 	const showMenu = () => {
 		menu.classList.toggle('nav__menu--active')
 		bars.classList.toggle('nav__bars--active')
@@ -67,6 +76,21 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 
+	const opinionSlider = index => {
+		startIndex = (index + totalCards) % totalCards
+
+		const displacement = -startIndex * opinionWidth
+		opinionContainer.style.transform = `translateX(${displacement}px)`
+
+		opinionCards.forEach((card, i) => {
+			if (i === startIndex) {
+				card.classList.add('references__card--active')
+			} else {
+				card.classList.remove('references__card--active')
+			}
+		})
+	}
+
 	const footerYear = () => {
 		const yearFooter = document.querySelector('.footer__year')
 
@@ -118,6 +142,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	const observer = new IntersectionObserver(numberAnimation, options)
 	observer.observe(section)
 
+	opinionOneBtn.addEventListener('click', () => {
+		opinionSlider(0)
+	})
+	opinionTwoBtn.addEventListener('click', () => {
+		opinionSlider(1)
+	})
+	opinionThreeBtn.addEventListener('click', () => {
+		opinionSlider(2)
+	})
 	logo.addEventListener('click', logoClose)
 	document.addEventListener('scroll', navBackground)
 	bars.addEventListener('click', showMenu)
