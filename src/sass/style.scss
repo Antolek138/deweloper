@@ -54,8 +54,9 @@ body {
 		flex-direction: column;
 		position: absolute;
 		inset: 0;
-		padding: 4em 0;
+		padding: 4em 0 2em 0;
 		height: 100dvh;
+		font-size: 2rem;
 		background-color: c.$black;
 		translate: 120% 0;
 		transition: translate 0.3s;
@@ -67,7 +68,7 @@ body {
 
 	&__menu-link {
 		&:last-child {
-			padding: 0.5em 1em;
+			padding: 1em 2em;
 			border-radius: 10px;
 			background-color: c.$blue;
 		}
@@ -216,7 +217,7 @@ body {
 
 	&__title {
 		margin: 1em 0;
-		color: c.$black;
+		color: #dddddd;
 	}
 
 	&__text {
@@ -237,6 +238,7 @@ body {
 
 	&__card {
 		width: clamp(260px, 280px, 340px);
+		box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
 
 		&-top {
 			position: relative;
@@ -407,10 +409,12 @@ body {
 
 	&__title {
 		margin: 1.5em 0;
+		padding: 0 1em;
+		font-size: 2.2rem;
 	}
 
 	&__text {
-		padding: 0 0.5em;
+		padding: 0 1em;
 	}
 }
 
@@ -719,6 +723,10 @@ body {
 
 		&__menu-link {
 			margin-left: 2em;
+
+			&:last-child {
+				padding: 1em;
+			}
 		}
 
 		&__bars {
@@ -862,6 +870,10 @@ body {
 		&__menu-link {
 			font-size: 1.8rem;
 			transition: color 0.3s, background-color 0.3s;
+
+			&:last-child {
+				padding: 0.8em 1.6em;
+			}
 
 			&:hover:not(:last-child) {
 				color: c.$blue;

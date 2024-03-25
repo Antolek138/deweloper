@@ -4,7 +4,7 @@ const cssnano = require('gulp-cssnano')
 const rename = require('gulp-rename')
 const babel = require('gulp-babel')
 const uglify = require('gulp-uglify')
-const sourcemaps = require('gulp-sourcemaps')
+// const sourcemaps = require('gulp-sourcemaps')
 const clean = require('gulp-clean')
 const kit = require('gulp-kit')
 const browserSync = require('browser-sync').create()
@@ -27,18 +27,18 @@ const sassCompiler = async () => {
 	const autoprefixer = (await import('gulp-autoprefixer')).default
 
 	return src(paths.sass)
-		.pipe(sourcemaps.init())
+		// .pipe(sourcemaps.init())
 		.pipe(sass().on('error', sass.logError))
 		.pipe(autoprefixer())
 		.pipe(cssnano())
 		.pipe(rename({ suffix: '.min' }))
-		.pipe(sourcemaps.write())
+		// .pipe(sourcemaps.write())
 		.pipe(dest(paths.sassDest))
 }
 
 const javaScript = done => {
 	src(paths.js)
-		.pipe(sourcemaps.init())
+		// .pipe(sourcemaps.init())
 		.pipe(
 			babel({
 				presets: ['@babel/env'],
@@ -46,7 +46,7 @@ const javaScript = done => {
 		)
 		.pipe(uglify())
 		.pipe(rename({ suffix: '.min' }))
-		.pipe(sourcemaps.write())
+		// .pipe(sourcemaps.write())
 		.pipe(dest(paths.jsDest))
 	done()
 }
